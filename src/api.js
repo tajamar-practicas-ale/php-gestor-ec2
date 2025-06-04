@@ -2,7 +2,7 @@
 import axios from 'axios';
 
 // Cambia esta URL según la IP pública o dominio de tu servidor
-const URL_BASE = 'http://TU_IP_PUBLICA/api';
+const URL_BASE = 'http://3.95.6.219/api';
 
 const api = axios.create({
     baseURL: URL_BASE,
