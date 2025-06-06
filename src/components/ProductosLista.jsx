@@ -14,7 +14,7 @@ export default function ProductosLista() {
             const response = await api.get('/productos');
             console.log('Datos recibidos:', response.data);
             console.log('Datos recibidos2:', response.data.productos);
-            setProductos(response.data.productos);
+            setProductos(response.data);
         } catch (err) {
             if (err.response && err.response.status === 401) {
                 navigate('/login');
@@ -60,18 +60,22 @@ export default function ProductosLista() {
                     </tr>
                 </thead>
                 <tbody>
-                    {productos.map(prod => (
-                        <tr key={prod.id}>
-                            <td>{prod.id}</td>
-                            <td>{prod.nombre}</td>
-                            <td>{prod.precio}</td>
-                            <td>{prod.stock}</td>
-                            <td>
-                                <button onClick={() => handleEditar(prod.id)}>Editar</button>
-                                <button onClick={() => handleEliminar(prod.id)}>Eliminar</button>
-                            </td>
-                        </tr>
-                    ))}
+                    {productos.length > 0 ? (
+                        productos.map(prod => (
+                            <tr key={prod.id}>
+                                <td>{prod.id}</td>
+                                <td>{prod.nombre}</td>
+                                <td>{prod.precio}</td>
+                                <td>{prod.stock}</td>
+                                <td>
+                                    <button onClick={() => handleEditar(prod.id)}>Editar</button>
+                                    <button onClick={() => handleEliminar(prod.id)}>Eliminar</button>
+                                </td>
+                            </tr>
+                        ))
+                    ) : (
+                        <tr><td colSpan="5">No hay productos disponibles.</td></tr>
+                    )}
                 </tbody>
             </table>
         </div>

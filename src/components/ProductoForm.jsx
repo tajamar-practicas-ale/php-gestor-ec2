@@ -48,13 +48,14 @@ export default function ProductoForm() {
             }
             navigate('/productos');
         } catch (err) {
+            console.error('Error al enviar producto:', err.response || err);
             if (err.response) {
                 if (err.response.status === 422) {
                     setError('Datos inválidos. Revisa los campos.');
                 } else if (err.response.status === 401) {
                     navigate('/login');
                 } else {
-                    setError('Error en la petición al servidor');
+                    setError(`Error en la petición al servidor: ${err.response.data.message || 'Error desconocido'}`);
                 }
             } else {
                 setError('Error de red');
